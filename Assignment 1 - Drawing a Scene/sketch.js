@@ -12,11 +12,11 @@ function setup() {
 }
 function sky() {
   noStroke();
-  fill("magenta");
+  fill("salmon");
   rect(0, 0, 1500, 1000);
   
   noStroke();
-  fill("hotPink");
+  fill("orange");
   rect(0, 500, 1500, 2000);
 
   noStroke();
