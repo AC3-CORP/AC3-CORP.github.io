@@ -8,74 +8,71 @@
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  
 }
 function sky() {
-  noStroke();
-  fill(192, 54, 44);
-  rect(0, 0, 1500, 1000);
+  let topColor = color(202, 104, 44); 
+  let bottomColor = color(255, 201, 175);
   
-  noStroke();
-  fill(203, 109, 81);
-  rect(0, 500, 1500, 2000);
-
-  noStroke();
-  fill(233,150,122);
-  rect(0, 600, 1500, 2000);
-
-  noStroke();
-  fill("pink");
-  rect(0, 670, 1500, 2000);
+  // Looing through every y-pixel
+  for (let y = 0; y < height; y++) {
+    // Calculating the percentage (0.0 to 1.0)
+    let n = map(y, 0, height, 0, 1);
+    let newColor = lerpColor(topColor, bottomColor, n);
+    
+    stroke(newColor);
+    line(0, y, width, y);
+  }
 }
 
-function landscapeNearView(){
+function sun() {
+  noStroke()
+  fill("white")
+  circle(675, 730, 85);
+  circle(610, 630, 95);
+}
+ 
+function mountains() {
   noStroke();
-  fill(160, 82, 45);
-  ellipse(0, 1000, 800, 400);
-  ellipse(200, 1000, 400, 400);
-  ellipse(400, 1000, 700, 400);
-  ellipse(600, 1000, 800, 400);
-  ellipse(800, 1000, 400, 400);
-  ellipse(1000, 1000, 900, 400);
+  fill(217, 131, 130);
+  triangle(0, 1000, 0, 650, 150, 1000);
+  triangle(50, 1000, 230, 580, 550, 1000);
+  triangle(250, 1000, 455, 705, 650, 1000);
+  triangle(0, 1000, 100, 800, 350, 1000);
+  triangle(700, 1000, 650, 800, 450, 1000);
+  triangle(700, 1000, 650, 800, 850, 1000);
+  triangle(600, 1000, 755, 700, 875, 1000);
+  triangle(655, 1000, 890, 700, 900, 1000);
 }
 
-function landscapeMidView(){
+function grounds() {
   noStroke();
-  fill(203, 109, 81);
-  ellipse(0, 950, 800, 400);
-  ellipse(200, 950, 1000, 400);
-  ellipse(400, 950, 700, 400);
-  ellipse(600, 950, 850, 400);
-  ellipse(800, 950, 1000, 400);
+  fill(196, 107, 82);
+  rect(1, 930, 900, 800);
+
+  noStroke();
+  fill(213, 125, 92);
+  rect(1, 950, 900, 800);
+
+  noStroke();
+  fill(227, 140, 102);
+  rect(1, 970, 900, 800);
 }
 
-function landscapeMidFarView(){
+function huts(){
   noStroke();
-  fill(244, 164, 96);
-  ellipse(0, 920, 800, 400);
-  ellipse(200, 920, 1000, 400);
-  ellipse(400, 920, 700, 400);
-  ellipse(600, 920, 850, 400);
-  ellipse(800, 920, 1000, 400);
-}
-
-function landscapeDistant(){
-  noStroke();
-  fill(0, 206, 209);
-  rect(0, 700, 1000, 1000);
-
-  noStroke();
-  fill(0,139,139);
-  rect(0, 710, 1000, 1000);
+  fill(197, 97, 97);
+  arc(100, 1050, 560, 580, PI, 0); 
+  arc(350, 1050, 230, 370, PI, 0);
+  rect(50, 650, 10, 200);
+  rect(70, 655, 5, 200);  
 }
 
 function draw() {
-  background(255, 116, 0);
   sky();
-  landscapeDistant();
-  landscapeMidFarView();
-  landscapeMidView();
-  landscapeNearView();
+  sun();
+  mountains();
+  grounds();
+  huts();
 }
 
 
