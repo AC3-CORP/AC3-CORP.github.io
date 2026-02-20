@@ -56,7 +56,7 @@ function grounds() {
   noStroke();
   fill(227, 140, 102);
   rect(1, 970, 900, 800);
-}
+} 
 
 function huts(){
   noStroke();
