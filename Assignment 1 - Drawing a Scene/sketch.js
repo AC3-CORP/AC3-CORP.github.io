@@ -25,7 +25,7 @@ function sky() {
 }
 
 function sun() {
-  noStroke()
+  noStroke();
   fill("white")
   circle(675, 730, 85);
   circle(610, 630, 95);
@@ -49,11 +49,9 @@ function grounds() {
   fill(196, 107, 82);
   rect(1, 930, 900, 800);
 
-  noStroke();
   fill(213, 125, 92);
   rect(1, 950, 900, 800);
 
-  noStroke();
   fill(227, 140, 102);
   rect(1, 970, 900, 800);
 } 
@@ -65,6 +63,10 @@ function huts(){
   arc(350, 1050, 230, 370, PI, 0);
   rect(50, 650, 10, 200);
   rect(70, 655, 5, 200);  
+}
+
+function keyPressed(){
+   blendMode();
 }
 
 function draw() {
