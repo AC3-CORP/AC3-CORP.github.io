@@ -12,7 +12,7 @@ function setup() {
 
 function movingBall() {
   // Using  draw() loop. we can animate.
-  cX += 0.67;
+  cX += 5;
   if(cX > width) cX = 0;
   circle(cX, 50, 25);
 }
@@ -24,7 +24,7 @@ function circleLine(y, size){
   let xStart = width * 0.1;; //10% position from left
   let xEnd = width * 0.9;    //90% position from left
 
-  for(let x = xStart; x < xEnd; x += size) {
+  for(let y = xStart; y < xEnd; y += size) {
     circle(x, y, size);
   }
 }
@@ -45,14 +45,13 @@ function gradientBackground() {
   }
 }
 
+function challenge(){
 
+}
 
 function draw() {
   background(220);
   gradientBackground();
   movingBall();
-  circleLine(height*0.35,30);
-  circleLine(height/2,50);
-  circleLine(height*0.65,70);
   
 }
