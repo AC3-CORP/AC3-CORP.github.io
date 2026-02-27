@@ -1,4 +1,4 @@
-// Interactive Scene (Tatooine w Luke Skywalker)
+// Interactive Scene {Tatooine w Luke Skywalker}
 // Ayeman Islam
 // Feb 11/26
 
@@ -36,54 +36,10 @@ function sky() {
 }
 
 function sun() {
-  // This functions controls the sun through the movement
-  // of the mouse and speed of the following of the pointer
-  x = lerp(x, mouseX, 0.05);
-  y = lerp(y, mouseY, 0.05);
-
-  noStroke()
-  fill("orange")
-  circle(x, y, diameter);
-}
-
-function clouds(){
-  // This controls
-  fill("pink");
-  cX += 3; // This controls the speed of the cloud 1
-  if(cX > 2000) cX = -20; //---This resets the animation once it reaces the end
-  ellipse(cX, 490, 210, 110);
-  ellipse(cX + 40, 500, 180, 60);
-  ellipse(cX - 40, 500, 240, 70);
-  ellipse(cX + 20, 500, 160, 100);
-  ellipse(cX - 20, 510, 160, 50);
-  ellipse(cX + 50, 510, 200, 90);
-
-  cX1 += 2; // This controls the speed of the cloud 2
-  if(cX1 > 2000) cX1 = -20; //---This resets the animation once it reaces the end
-  ellipse(cX1, 235, 220, 110);
-  ellipse(cX1 + 40, 230, 180, 60);
-  ellipse(cX1 - 40, 230, 240, 70);
-  ellipse(cX1 + 20, 240, 160, 100);
-  ellipse(cX1 - 20, 240, 160, 50);
-  ellipse(cX1 + 50, 240, 200, 90);
-
-  cX2 += -2; // This controls the speed of the cloud 3
-  if(cX2 < -100) cX2 = 2000; //---This resets the animation once it reaces the end               
-  ellipse(cX2, 90, 110, 100);
-  ellipse(cX2 + 40, 110, 180, 60);
-  ellipse(cX2 - 40, 90, 240, 70);
-  ellipse(cX2 + 20, 90, 160, 100);
-  ellipse(cX2 - 20, 100, 160, 60);
-  ellipse(cX2 - 50, 100, 200, 90);
-
-  cX3 += -3; // This controls the speed of the cloud 4
-  if(cX3 < -100) cX3 = 2000; //---This resets the animation once it reaces the end
-  ellipse(cX3, 330, 210, 110);
-  ellipse(cX3 + 40, 340, 180, 60);
-  ellipse(cX3 - 40, 340, 240, 70);
-  ellipse(cX3 + 20, 350, 160, 100);
-  ellipse(cX3 - 20, 350, 160, 50);
-  ellipse(cX3 + 50, 350, 200, 90);
+  noStroke();
+  fill("white");
+  circle(675, 730, 85);
+  circle(610, 630, 95);
 }
 
 function mountains() {
@@ -110,11 +66,9 @@ function grounds() {
   fill(196, 107, 82);
   rect(1, 930, windowWidth, 800);
 
-  noStroke();
   fill(213, 125, 92);
   rect(1, 950, windowWidth, 800);
 
-  noStroke();
   fill(227, 140, 102);
   rect(1, 970, windowWidth, 800);
 } 
@@ -129,7 +83,6 @@ function huts(){
   rect(70, 655, 5, 200); 
 
   rect(1, 1000, windowWidth, 40);
-  
 }
 
 function moveLuke() {
@@ -174,6 +127,10 @@ function drawLuke() {
   rect(17, -80, 2, 50);
 
   pop();
+}
+
+function keyPressed(){
+   blendMode();
 }
 
 function draw() {
