@@ -17,20 +17,20 @@ let speed = 10;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  x = windowHeight/2, y = windowWidth/2; // setting the x and y positions of the sun
+  x = windowHeight / 2, y = windowWidth / 2; // setting the x and y positions of the sun
 }
-
+d
 function sky() {
   // This function controls the colors of the gradient sky
   let topColor = color(202, 104, 44);
   let bottomColor = color(255, 201, 175);
- 
+
   // Looping through every y-pixel
   for (let y = 0; y < height; y++) {
     // Calculating the percentage (0.0 to 1.0)
     let n = map(y, 0, height, 0, 1);
     let newColor = lerpColor(topColor, bottomColor, n);
-   
+
     stroke(newColor);
     line(0, y, width, y);
   }
@@ -47,11 +47,11 @@ function sun() {
   circle(x, y, diameter);
 }
 
-function clouds(){
+function clouds() {
   // This controls
   fill("pink");
   cX += 3; // This controls the speed of the cloud 1
-  if(cX > 2000) cX = -20; //---This resets the animation once it reaces the end
+  if (cX > 2000) cX = -20; //---This resets the animation once it reaces the end
   ellipse(cX, 490, 210, 110);
   ellipse(cX + 40, 500, 180, 60);
   ellipse(cX - 40, 500, 240, 70);
@@ -60,7 +60,7 @@ function clouds(){
   ellipse(cX + 50, 510, 200, 90);
 
   cX1 += 2; // This controls the speed of the cloud 2
-  if(cX1 > 2000) cX1 = -20; //---This resets the animation once it reaces the end
+  if (cX1 > 2000) cX1 = -20; //---This resets the animation once it reaces the end
   ellipse(cX1, 235, 220, 110);
   ellipse(cX1 + 40, 230, 180, 60);
   ellipse(cX1 - 40, 230, 240, 70);
@@ -69,7 +69,7 @@ function clouds(){
   ellipse(cX1 + 50, 240, 200, 90);
 
   cX2 += -2; // This controls the speed of the cloud 3
-  if(cX2 < -100) cX2 = 2000; //---This resets the animation once it reaces the end              
+  if (cX2 < -100) cX2 = 2000; //---This resets the animation once it reaces the end              
   ellipse(cX2, 90, 110, 100);
   ellipse(cX2 + 40, 110, 180, 60);
   ellipse(cX2 - 40, 90, 240, 70);
@@ -78,7 +78,7 @@ function clouds(){
   ellipse(cX2 - 50, 100, 200, 90);
 
   cX3 += -3; // This controls the speed of the cloud 4
-  if(cX3 < -100) cX3 = 2000; //---This resets the animation once it reaces the end
+  if (cX3 < -100) cX3 = 2000; //---This resets the animation once it reaces the end
   ellipse(cX3, 330, 210, 110);
   ellipse(cX3 + 40, 340, 180, 60);
   ellipse(cX3 - 40, 340, 240, 70);
@@ -120,7 +120,7 @@ function grounds() {
   rect(1, 970, windowWidth, 800);
 }
 
-function huts(){
+function huts() {
   // This function is the making of the Tatooine Hut
   noStroke();
   fill(197, 97, 97);
@@ -131,7 +131,7 @@ function huts(){
 
 
   rect(1, 1000, windowWidth, 40);
- 
+
 }
 
 function moveLuke() {
@@ -149,7 +149,7 @@ function drawLuke() {
   // This function is the making of the Luke Skywalker
   // The scale of the character can be changed
   // through the number change in scale with manual inputs
- 
+
   push();
   translate(lukeX, lukeY);
 
@@ -196,27 +196,27 @@ function draw() {
   fill(0, 150, 255);
   textAlign(RIGHT, BOTTOM);
   textSize(32);
-  text("Ayeman", width-10, height-10);
+  text("Ayeman", width - 10, height - 10);
 
 
   fill(255);
   textAlign(RIGHT, BOTTOM);
   textSize(32);
-  text("Ayeman", width-10, height-10);
+  text("Ayeman", width - 10, height - 10);
 
 
 
 
   // These if-statements control the sky color through the blending mode
   // The lower the sun in the canvas, the darker it will get.
-  if (y > 700) {                
+  if (y > 700) {
     blendMode(OVERLAY);
     noStroke();
     fill(0, 0, 0, 3000);
     rect(0, 0, width, height);
     blendMode(BLEND);
   }
-  if( y > 900){
+  if (y > 900) {
     blendMode(MULTIPLY);
     noStroke();
     fill(0, 0, 230, 200);
