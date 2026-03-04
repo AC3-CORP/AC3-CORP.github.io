@@ -6,7 +6,7 @@
 
 //Global Variable
 let y;
-let startTime, original_startTime;
+let start, original_start;
 let rectWidth = 5;
 
 
@@ -18,19 +18,20 @@ function setup() {
 
   y = windowHeight;
 
-  startTime = random(100);
+  original_start = random(100);
+
 }
 
 function rockyTerrain() {
-  startTime = original_startTime;
+  start = original_start;
 
   for (let x = 0; x < width; x += rectWidth) {
-    let rectHeight = map(noise(startTime)) * (height * 0.95);
+    let rectHeight = map(noise(start)) * (height * 0.95);
 
     fill("black");
     rect(x, y, rectWidth, -rectHeight);
 
-    startTime += 0.005;
+    start += 0.005;
   }
 }
 
