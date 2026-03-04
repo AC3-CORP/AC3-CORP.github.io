@@ -5,6 +5,8 @@
 // 
 
 //Global Variable
+let y;
+let startTime, original_startTime;
 let rectWidth = 5;
 
 
@@ -13,17 +15,36 @@ let rectWidth = 5;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke()
+
+  y = windowHeight;
+
+  startTime = random(100);
 }
 
 function rockyTerrain() {
-  for( let x = 0; x < width; x += rectWidth){
-    let rectHeight = random(0, height*0.75);
+  startTime = original_startTime;
+
+  for (let x = 0; x < width; x += rectWidth) {
+    let rectHeight = map(noise(startTime)) * (height * 0.95);
 
     fill("black");
-    rect(x, random(1000,770), rectWidth, windowHeight);
+    rect(x, y, rectWidth, -rectHeight);
+
+    startTime += 0.005;
   }
 }
 
+function keyPressed() {
+  if (keyCode === 37) {
+    rectWidth += 1;
+  }
+  else if (keyCode === 39) {
+    rectWidth -= 1;
+    if (rectWidth < 1){
+      rectWidth = 1;
+    }
+  }
+}
 
 function draw() {
   background(220);
