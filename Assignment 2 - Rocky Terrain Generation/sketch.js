@@ -8,13 +8,10 @@
 let y;
 let start, original_start;
 let rectWidth = 5;
-
-
-
+let peakX
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  noStroke()
 
   y = windowHeight;
 
@@ -22,11 +19,17 @@ function setup() {
 
 }
 
-function rockyTerrain() {
-  start = original_start;
+function drawFlag(x, y) {
+  stroke("green");
+  strokeWeight(5);
+  line(x, y, x, y+15);
+}
 
+function generateTerrain() {
+  noStroke();
+  start = original_start;
   for (let x = 0; x < width; x += rectWidth) {
-    let rectHeight = map(noise(start)) * (height * 0.95);
+    let rectHeight = map(noise(start), 0, 1, 0, height * 0.95);
 
     fill("black");
     rect(x, y, rectWidth, -rectHeight);
@@ -34,6 +37,7 @@ function rockyTerrain() {
     start += 0.005;
   }
 }
+
 
 function keyPressed() {
   if (keyCode === 37) {
@@ -49,5 +53,6 @@ function keyPressed() {
 
 function draw() {
   background(220);
-  rockyTerrain();
+  generateTerrain();
+  //drawFlag();
 }
