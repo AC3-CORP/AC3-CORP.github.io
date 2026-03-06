@@ -8,7 +8,7 @@
 let y;
 let start, original_start;
 let rectWidth = 5;
-let peakX
+let flagX = 0; let flagY = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -19,10 +19,14 @@ function setup() {
 
 }
 
-function drawFlag(x, y) {
+function drawFlag(flagX, flagY) {
   stroke("green");
-  strokeWeight(5);
-  line(x, y, x, y+15);
+  strokeWeight(3);
+  line(flagX, flagY, flagX, flagY-20);
+  
+  fill("green");
+  strokeWeight(1)
+  triangle(flagX - 1 , flagY - 10, flagX - 1, flagY - 22, flagX + 14, flagY - 20);
 }
 
 function generateTerrain() {
@@ -54,5 +58,6 @@ function keyPressed() {
 function draw() {
   background(220);
   generateTerrain();
-  //drawFlag();
+  drawFlag(100, 100);
 }
+
