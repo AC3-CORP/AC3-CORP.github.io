@@ -41,13 +41,19 @@ function lion(){
 
 function pinWheel(){
   image(pinImages[current], width/2, height*0.7);
-  if(frameCount%2 === 0){
+  if(frameCount%1 === 0){
     current = (current + 1)%9;
+  }
+}
+
+class PinWheel{
+  constructor(x,y){
+    this.x = x; this.y = y; 
   }
 }
 
 function draw() {
   background(220);
-  lion();
+  //lion();
   pinWheel();
 }
