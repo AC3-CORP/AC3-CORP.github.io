@@ -24,7 +24,6 @@ function setup() {
 function draw() {
   background(225);
   renderGrid();
-  greenOverlay();
   textSize(30);
   fill("green");
   if(winCondition()){
@@ -46,10 +45,10 @@ function greenOverlay(){
       flip(x, y);
 
       // Flip the cardinal (NSEW) neighbours
-      fill("green", x - 1 >= 0); // WEST
-      fill("green", x + 1 <= rows); // EAST
-      fill("green", y - 1 >= 0); // NORTH
-      fill("green", y + 1 <= cols); // SOUTH
+      if (x - 1 >= 0) fill("green", 20); // WEST
+      if (x + 1 <= rows) fill("green", 20); // EAST
+      if (y - 1 >= 0) fill("green", 20); // NORTH
+      if (y + 1 <= cols) fill("green", 20); // SOUTH
     }
   }
 }
