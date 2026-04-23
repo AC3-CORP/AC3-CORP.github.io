@@ -9,6 +9,7 @@
 // translation b/w 2D and 1D indices
 
 let myImage;
+let myVideo;
 
 function preload(){
   // called BEFORE setip. Won't conlcude 
@@ -19,20 +20,41 @@ function preload(){
 
 
 function setup() {
-  createCanvas(myImage.width, myImage.height);
+  //createCanvas(myImage.width, myImage.height);
+  createCanvas(640,480);
+  myVideo = createCapture(VIDEO);
   pixelDensity(1);
+  //myVideo.hide();
 
 }
 
 function draw() {
   background(220);
-  image(myImage, 0, 0);
-
+  //image(myImage, 0, 0);
+  image(myVideo,0,0);
   // access and modify the pixels on the canvas
   loadPixels(); // dumps data from canvas into array
+  background(0);
+  textImage();
+  background(0,0,255,50);
   //boost();
-  greyscale();
-  updatePixels();
+  //greyscale();
+  //updatePixels();
+}
+
+function textImage(){
+  let scaleAmount = 5;
+  textSize(scaleAmount);
+  for(let x = 0; x < width; x+= scaleAmount){
+    for(let y = 0; y < height; y += scaleAmount){
+      let avg = getAvg(x,y); //0-255
+      if(avg > 210) text("❌", x, y);
+      else if(avg > 170) text("🤖", x, y);
+      else if(avg > 130) text("💗", x, y);
+      else if(avg > 90) text("💗🤖❌", x, y);
+      else if(avg > 35) text("", x, y);
+    }
+  }
 }
 
 function greyscale() {
