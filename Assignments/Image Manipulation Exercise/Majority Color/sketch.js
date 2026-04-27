@@ -28,10 +28,11 @@ function draw() {
   image(myImage, 0, 0);
   // access and modify the pixels on the canvas
   loadPixels(); // dumps data from canvas into array
-  textImage();
+  //textImage();
   //boost();
   //greyscale();
   //updatePixels();
+  majorColor();
 }
 
 function textImage(){
@@ -114,3 +115,12 @@ function majorColor(){
     }
   }
 }
+
+function removeGreen(){
+  let r = pixels[index];
+  let g = pixels[index+1];
+  let b = pixels[index+2];
+
+  
+}
+
