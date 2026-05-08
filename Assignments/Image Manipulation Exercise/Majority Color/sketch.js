@@ -8,19 +8,17 @@
 
 let myImage;
 
-function preload(){
-  // called BEFORE setip. Won't conlcude 
+function preload() {
+  // called BEFORE setup. Won't conlcude 
   // until all loads are complete.
-  myImage = loadImage("assets/Megtron-D16.jpg");
-  
+  myImage = loadImage("assets/Megatron-2.jpeg");
 }
 
 
 function setup() {
   createCanvas(myImage.width, myImage.height);
   pixelDensity(1);
-  //myVideo.hide();
-
+  noLoop();
 }
 
 function draw() {
@@ -28,99 +26,105 @@ function draw() {
   image(myImage, 0, 0);
   // access and modify the pixels on the canvas
   loadPixels(); // dumps data from canvas into array
-  //textImage();
-  //boost();
-  //greyscale();
-  //updatePixels();
-  majorColor();
+  //majorColor();
+  //removeGreen();
+  colorPosterize();
 }
 
-function textImage(){
-  let scaleAmount = 5;
-  fill("red");
-  textSize(scaleAmount);
-  for(let x = 0; x < width; x+= scaleAmount){
-    for(let y = 0; y < height; y += scaleAmount){
-      let avg = getAvg(x,y); //0-255
-      if(avg > 210) text("X", x, y);
-      else if(avg > 170) text("XX", x, y);
-      else if(avg > 130) text("XXX", x, y);
-      else if(avg > 90) text("XXXX", x, y);
-      else if(avg > 35) text("XXXXX", x, y);
-    }
-  }
-}
-
-function greyscale() {
-  // use the average intentsity of each pixel
-  // to represent it as a shade of grey
-  for(let x = 0; x< width; x++){
-    for(let y = 0; y < height; y++){
-      let avg = getAvg(x,y);
-      setPixel(x,y, avg, avg, avg);
-
-    }
-  }
-}
-
-function setPixel(x,y,r,g,b){
+function setPixel(x, y, r, g, b) {
   // x,y → pixel location
   // r,g,b → color values
-  let index = 4*(y*width + x);
-  setPixelOneD(index,r,g,b);
+  let index = 4 * (y * width + x);
+  setPixelOneD(index, r, g, b);
 }
 
-function boost(){
-  // brightening filter
-  let boostAmount = map(mouseX, 0, width, -100, 100);
-  for(let i = 0; i < pixels.length; i+=4){
-    let r = pixels[i] + boostAmount;
-    let g = pixels[i+1] + boostAmount;
-    let b = pixels[i+2] + boostAmount;
-    setPixelOneD(i,r,g,b);
-  }
-}
-
-function getAvg(x,y){
+function getAvg(x, y) {
   //return avergage intensity of rgb
   // at (x,y).
-  let index = 4*(y*width + x);
+  let index = 4 * (y * width + x);
   let r = pixels[index];
-  let g = pixels[index+1];
-  let b = pixels[index+2];
+  let g = pixels[index + 1];
+  let b = pixels[index + 2];
 
   return (r + g + b) / 3;
 }
 
-function setPixelOneD(pos, r, g, b){
-  // pos → 1D location of the piexl'red component
+function setPixelOneD(pos, r, g, b) {
+  // pos → 1D location of the pixel'red component
   // r,g,b → new color values (0-255) fpr the pixels
   pixels[pos] = r;
-  pixels[pos+1] = g;
-  pixels[pos+2] = b;
-  
+  pixels[pos + 1] = g;
+  pixels[pos + 2] = b;
+  pixels[pos + 3] = 255;
+
 }
 
-function majorColor(){
-  let r = pixels[index];
-  let g = pixels[index+1];
-  let b = pixels[index+2];
+function majorColor() {
+  // This function replaces the current RGB value with
+  // the great value found out of the three
+  for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) {
 
-  for(let x = 0; x < width; x++){
-    for(let y = 0; y < height; y++){
-      if(r === g === b) setPixel(x,y,255,0,0);
-      if( r != g != b) setPixel(x, y, 0, 255, 0);
-      if( r != g != b) setPixel(x, y, 0, 255, 0);
-      setPixel(x, y, r, g, b);
+      let index = 4 * (y * width + x); // converts the current (x,y) pixel position
+      // into the correct index value in the pixels array
+
+      let r = pixels[index];
+      let g = pixels[index + 1];
+      let b = pixels[index + 2];
+
+      if (r >= g && r >= b) setPixel(x, y, 255, 0, 0); //Condition if red wins
+      else if (g >= b) setPixel(x, y, 0, 255, 0); // Condition if green wins
+      else setPixel(x, y, 0, 0, 255); // Anything would turn to blue other than 
+    }                                // the given conditions above
+  }
+  updatePixels();
+}
+
+function removeGreen() {
+  // This function allows to remove the Green Color value 
+  // from half of the image vertically
+  for (let x = width / 2; x < width; x++) {
+    for (let y = 0; y < height; y++) {
+
+      let index = 4 * (y * width + x); // converts the current (x,y) pixel position
+      // into the correct index value in the pixels array 
+
+      let r = pixels[index];
+      let g = pixels[index + 1];
+      let b = pixels[index + 2];
+
+      setPixel(x, y, r, 0, b); // removes the green value and keeping other values
     }
   }
+  updatePixels();
 }
 
-function removeGreen(){
-  let r = pixels[index];
-  let g = pixels[index+1];
-  let b = pixels[index+2];
+function colorPosterize() {
+  // This function will be looking at each pixel
+  // allowing to overwrite that pixel with the five possible set of colors
+  //
+  // Avg Value      Color Changes to
+  // 205 - 255   =	  170, 230, 220
+  // 155 - 204   =    105,150,210
+  // 105 - 154   =    120,180,60
+  //  55 - 104   =    130,30,130
+  //  0 - 54	   =    90,10,50
 
-  
+  for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) {
+
+      let avg = getAvg(x, y);
+      if (avg >= 205) setPixel(x, y, 170, 230, 220);
+      else if (avg >= 155) setPixel(x, y, 105, 150, 210);
+      else if (avg >= 105) setPixel(x, y, 120, 180, 60);
+      else if (avg >= 55) setPixel(x, y, 130, 30, 130);
+      else setPixel(x, y, 90, 10, 50);
+    }
+  }
+  updatePixels();
+}
+
+function mirror() {
+
 }
 
