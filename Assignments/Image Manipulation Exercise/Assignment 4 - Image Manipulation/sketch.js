@@ -2,8 +2,7 @@
 // Ayeman Islam
 // April 24/26
 //
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// 
 
 
 let myImage;
@@ -13,7 +12,6 @@ function preload() {
   // until all loads are complete.
   myImage = loadImage("assets/Megatron-2.jpeg");
 }
-
 
 function setup() {
   createCanvas(myImage.width, myImage.height);
@@ -29,6 +27,7 @@ function draw() {
   //majorColor();
   //removeGreen();
   colorPosterize();
+  //mirror();
 }
 
 function setPixel(x, y, r, g, b) {
@@ -125,6 +124,25 @@ function colorPosterize() {
 }
 
 function mirror() {
+  // This function copies pixels from
+  // the right side onto the left side
 
+  for(let x = width/2; x < width; x++){
+    for(let y = 0; y < height; y++){
+
+      let index = 4 * (y * width + x);
+
+      let r = pixels[index];
+      let g = pixels[index + 1];
+      let b = pixels[index + 2];
+
+      // finds mirrored x location
+      let mirrorX = width - x - 1;
+
+      setPixel(mirrorX, y, r, g, b);
+    }
+  }
+  updatePixels();
 }
+
 
